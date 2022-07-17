@@ -29,16 +29,16 @@ classic longest substring problem.
 
 def func(string):
     char_index_map = {}
-    window_start = 0
+    l = 0
     max_len = 0
 
-    for window_end in range(len(string)):
-        right_char = string[window_end]
-        if right_char in char_index_map:
+    for r in range(len(string)):
+        r_char = string[r]
+        if r_char in char_index_map:
             # max with window start to prevent us from jumping back from old index values
-            window_start = max(window_start, char_index_map[right_char] + 1)
-        char_index_map[right_char] = window_end
-        max_len = max(max_len, window_end - window_start + 1)
+            l = max(l, char_index_map[r_char] + 1)
+        char_index_map[r_char] = r
+        max_len = max(max_len, r - l + 1)
     return max_len
 
 

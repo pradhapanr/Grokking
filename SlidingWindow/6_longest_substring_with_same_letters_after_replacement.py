@@ -41,23 +41,19 @@ window contains a valid substring. But as stated before, this is not necessary.
 
 
 def func(string, k):
-    window_start = 0
+    l = 0
     max_f = 0
     max_length = 0
     char_map = {}
-    for window_end in range(len(string)):
-        right_char = string[window_end]
-        if right_char in char_map:
-            char_map[right_char] += 1
-        else:
-            char_map[right_char] = 1
+    for r in range(len(string)):
+        r_char = string[r]
+        char_map[r_char] = 1 + char_map.get(r_char, 0)
+        max_f = max(max_f, char_map[r_char])
 
-        max_f = max(max_f, char_map[right_char])
-
-        if ((window_end - window_start + 1) - max_f > k):
-            char_map[string[window_start]] -= 1
-            window_start += 1
-        max_length = max(max_length, window_end - window_start + 1)
+        if ((r - l + 1) - max_f > k):
+            char_map[string[l]] -= 1
+            l += 1
+        max_length = max(max_length, r - l + 1)
     return max_length
 
 

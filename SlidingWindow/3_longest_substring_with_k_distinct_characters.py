@@ -28,25 +28,22 @@ return.
 
 
 def func(string, k):
-    letter_map = {}
-    window_start = 0
+    char_map = {}
+    l = 0
 
-    longest_length = 0
-    for window_end in range(len(string)):
-        right_char = string[window_end]
-        if right_char in letter_map:
-            letter_map[right_char] += 1
-        else:
-            letter_map[right_char] = 1
-        while len(letter_map) > k:
-            left_char = string[window_start]
-            letter_map[left_char] -= 1
-            if letter_map[left_char] == 0:
-                letter_map.pop(left_char)
-            window_start += 1
-        longest_length = max(longest_length, window_end - window_start + 1)
+    max_len = 0
+    for r in range(len(string)):
+        r_char = string[r]
+        char_map[r_char] = 1 + char_map.get(r_char, 0)
+        while len(char_map) > k:
+            l_char = string[l]
+            char_map[l_char] -= 1
+            if char_map[l_char] == 0:
+                char_map.pop(l_char)
+            l += 1
+        max_len = max(max_len, r - l + 1)
 
-    return longest_length
+    return max_len
 
 
 def test_cases():

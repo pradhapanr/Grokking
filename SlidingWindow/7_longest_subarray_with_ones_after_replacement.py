@@ -22,19 +22,19 @@ use of a hashmap. Rest of the process is the exact same.
 
 
 def func(arr, k):
-    window_start = 0
+    l = 0
     f = 0
-    max_length = 0
-    for window_end in range(len(arr)):
-        if arr[window_end] == 1:
+    max_len = 0
+    for r in range(len(arr)):
+        if arr[r] == 1:
             f += 1
 
-        if ((window_end - window_start + 1) - f) > k:
-            if arr[window_start] == 1:
+        if ((r - l + 1) - f) > k:
+            if arr[l] == 1:
                 f -= 1
-            window_start += 1
-        max_length = max(max_length, window_end - window_start + 1)
-    return max_length
+            l += 1
+        max_len = max(max_len, r - l + 1)
+    return max_len
 
 
 def test_cases():

@@ -36,23 +36,20 @@ return.
 
 def func(fruits):
     fruit_map = {}
-    window_start = 0
+    l = 0
     max_fruits = 0
 
-    for window_end in range(len(fruits)):
-        right_fruit = fruits[window_end]
-        if right_fruit in fruit_map:
-            fruit_map[right_fruit] += 1
-        else:
-            fruit_map[right_fruit] = 1
+    for r in range(len(fruits)):
+        r_fruit = fruits[r]
+        fruit_map[r_fruit] = 1 + fruit_map.get(r_fruit, 0)
 
         while len(fruit_map) > 2:
-            left_fruit = fruits[window_start]
-            fruit_map[left_fruit] -= 1
-            if fruit_map[left_fruit] == 0:
-                fruit_map.pop(left_fruit)
-            window_start += 1
-        max_fruits = max(max_fruits, window_end - window_start + 1)
+            l_fruit = fruits[l]
+            fruit_map[l_fruit] -= 1
+            if fruit_map[l_fruit] == 0:
+                fruit_map.pop(l_fruit)
+            l += 1
+        max_fruits = max(max_fruits, r - l + 1)
     return max_fruits
 
 

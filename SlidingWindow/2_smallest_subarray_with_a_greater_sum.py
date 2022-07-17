@@ -29,19 +29,19 @@ import math
 
 
 def func(arr, s):
-    window_start = 0
-    min_length = math.inf
+    l = 0
+    min_len = math.inf
     sum = 0
-    for window_end in range(len(arr)):
-        sum += arr[window_end]
+    for r in range(len(arr)):
+        sum += arr[r]
 
         while sum >= s:
-            min_length = min(min_length, window_end - window_start + 1)
-            sum -= arr[window_start]
-            window_start += 1
-    if min_length == math.inf:
+            min_len = min(min_len, r - l + 1)
+            sum -= arr[l]
+            l += 1
+    if min_len == math.inf:
         return 0
-    return min_length
+    return min_len
 
 
 def test_cases():
